@@ -1,0 +1,2 @@
+D:\repos\Parallel\Jacobi\Debug\Jacobi.exe
+D:\repos\Parallel\Jacobi\Debug\Jacobi.pdb

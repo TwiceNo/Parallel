@@ -1,0 +1,4 @@
+D:\2 курс\параллель\multmatrix\Debug\multmatrix.exe
+D:\2 курс\параллель\multmatrix\Debug\multmatrix.pdb
+D:\repos\Parallel\multmatrix\Debug\multmatrix.exe
+D:\repos\Parallel\multmatrix\Debug\multmatrix.pdb
