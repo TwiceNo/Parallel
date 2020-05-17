@@ -4,11 +4,11 @@ Matrix::Matrix(int x, bool f)
 {
 	n = x; eps = 0.0001;
 
-	matrix = new double* [n];
-	result = new double[n];
+	matrix = new float* [n];
+	result = new float[n];
 
 	for (int i = 0; i < n; i++)
-		matrix[i] = new double[n + 1];
+		matrix[i] = new float[n + 1];
 
 	if (f)
 	{
@@ -28,6 +28,8 @@ Matrix::Matrix(int x, bool f)
 		cout << "\nТребуемая точность: ";
 		cin >> eps;
 	}
+
+	reduction();
 }
 
 
@@ -37,9 +39,9 @@ Matrix::~Matrix()
 }
 
 
-double* Matrix::first_approach()
+float* Matrix::first_approach()
 {
-	double* a = new double[n];
+	float* a = new float[n];
 	for (int i = 0; i < n; i++)
 		a[i] = matrix[i][n];
 	return a;
@@ -48,8 +50,8 @@ double* Matrix::first_approach()
 
 void Matrix::sequential()
 {
-	double* appr = first_approach();
-	double* prev = new double[n];
+	float* appr = first_approach();
+	float* prev = new float[n];
 	for (int i = 0; i < n; i++)
 		prev[i] = 0;
 
@@ -65,12 +67,12 @@ void Matrix::sequential()
 
 
 
-bool Matrix::check_precision(double*& a, double*& b)
+bool Matrix::check_precision(float*& a, float*& b)
 {
 	bool f = 1;
 	for (int i = 0; i < n; i++)
 	{
-		if (b[i] - a[i] >= eps) f = 0;
+		if (abs(b[i] - a[i]) >= eps) f = 0;
 		a[i] = b[i]; b[i] = 0;
 	}
 	return f;
@@ -79,8 +81,8 @@ bool Matrix::check_precision(double*& a, double*& b)
 
 void Matrix::parallel()
 {
-	double* appr = first_approach();
-	double* prev = new double[n];
+	float* appr = first_approach();
+	float* prev = new float[n];
 	for (int i = 0; i < n; i++)
 		prev[i] = 0;
 
@@ -90,7 +92,6 @@ void Matrix::parallel()
 	#pragma omp parallel
 	{
 		int thread = omp_get_thread_num();
-		cout << thread << endl;
 		for (int i = 0; i < set; i++)
 			for (int j = 0; j <= n; j++)
 				if ((thread * set + i) != j)
@@ -120,7 +121,7 @@ void Matrix::reduction()
 {
 	for (int i = 0; i < n; i++)
 	{
-		double div = matrix[i][i];
+		float div = matrix[i][i];
 		for (int j = 0; j <= n; j++)
 			matrix[i][j] /= div;
 	}
@@ -129,11 +130,11 @@ void Matrix::reduction()
 void Matrix::print_result()
 {
 	for (int i = 0; i < n; i++)
-		cout << "X" << i << " = " << setprecision(6) << result[i] << endl;
+		cout << "X" << i << " = " << setprecision(5) << result[i] << endl;
 }
 
 
-void Matrix::print(double* a)
+void Matrix::print(float* a)
 {
 	for (int i = 0; i < n; i++)
 		cout << a[i] << "\t";
@@ -143,18 +144,18 @@ void Matrix::print(double* a)
 
 void Matrix::generate()
 {
-	srand(time(0));
+	//srand(time(0));
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < n; i++)
 	{ 
-		double sum = 0;
+		float sum = 0;
 		for (int j = 0; j <= n; j++)
 			if (i != j)
 			{
 				matrix[i][j] = 1;//0 + rand() % (51);
 				if (j != n) sum += matrix[i][j];
 			}
-		matrix[i][i] = sum+1;
+		matrix[i][i] = sum + 1;
 		//matrix[i][i] += 0 + rand() % (50);
 	}
 }
@@ -164,10 +165,10 @@ bool Matrix::diagonally_dominant()
 {
 	for (int i = 0; i < n; i++)
 	{
-		double sum = 0;
+		float sum = 0;
 		for (int j = 0; j < n; j++)
-			if (i != j) sum += matrix[i][j];
-		if (sum > matrix[i][i]) return false;
+			if (i != j) sum += abs(matrix[i][j]);
+		if (sum > abs(matrix[i][i])) return false;
 	}
 	return true;
 }

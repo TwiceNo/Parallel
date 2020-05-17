@@ -1,1 +1,3 @@
-﻿  Jacobi.vcxproj -> D:\repos\Parallel\Jacobi\Debug\Jacobi.exe
+﻿  Source.cpp
+D:\repos\Parallel\Jacobi\Source.cpp(5,21): warning C4305: =: усечение из "double" в "float"
+  Jacobi.vcxproj -> D:\repos\Parallel\Jacobi\Debug\Jacobi.exe

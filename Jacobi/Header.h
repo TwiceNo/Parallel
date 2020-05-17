@@ -8,9 +8,9 @@ using namespace std;
 
 class Matrix
 {
-	double** matrix;
-	double* result;
-	double eps;
+	float** matrix;
+	float* result;
+	float eps;
 	int n; 
 
 public:
@@ -26,9 +26,9 @@ public:
 	void reduction();
 
 private:
-	double* first_approach();
-	bool check_precision(double*&, double*&);
+	float* first_approach();
+	bool check_precision(float*&, float*&);
 	void generate();
 	void set();
-	void print(double*);
+	void print(float*);
 };
