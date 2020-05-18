@@ -9,7 +9,7 @@ using namespace std;
 class Matrix
 {
 	float** matrix;
-	float* result;
+	float* solution, * result;
 	float eps;
 	int n; 
 
@@ -24,6 +24,7 @@ public:
 	void print_result();
 	bool diagonally_dominant();
 	void reduction();
+	float maximal_deviation();
 
 private:
 	float* first_approach();

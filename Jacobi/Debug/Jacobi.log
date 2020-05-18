@@ -1,3 +1,6 @@
 ﻿  Source.cpp
 D:\repos\Parallel\Jacobi\Source.cpp(5,21): warning C4305: =: усечение из "double" в "float"
+D:\repos\Parallel\Jacobi\Source.cpp(146,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\repos\Parallel\Jacobi\Source.cpp(150,20): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+D:\repos\Parallel\Jacobi\Source.cpp(159,23): warning C4244: =: преобразование "int" в "float", возможна потеря данных
   Jacobi.vcxproj -> D:\repos\Parallel\Jacobi\Debug\Jacobi.exe

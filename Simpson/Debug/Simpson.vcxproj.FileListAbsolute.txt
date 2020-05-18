@@ -1,0 +1,2 @@
+D:\repos\Parallel\Simpson\Debug\Simpson.exe
+D:\repos\Parallel\Simpson\Debug\Simpson.pdb

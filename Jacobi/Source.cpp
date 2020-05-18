@@ -20,7 +20,7 @@ Matrix::Matrix(int x, bool f)
 	}
 	else set();
 
-	cout << "\nТочность по умолчанию: " << eps << endl;
+	cout << "\nТочность по умолчанию: " << fixed << eps << endl;
 	cout << "0. Оставить." << endl;
 	cout << "1. Изменить." << endl;
 	cin >> f; if (f)
@@ -28,8 +28,6 @@ Matrix::Matrix(int x, bool f)
 		cout << "\nТребуемая точность: ";
 		cin >> eps;
 	}
-
-	reduction();
 }
 
 
@@ -64,7 +62,6 @@ void Matrix::sequential()
 						appr[i] -= matrix[i][j] * prev[j];
 	result = prev;
 }
-
 
 
 bool Matrix::check_precision(float*& a, float*& b)
@@ -102,6 +99,7 @@ void Matrix::parallel()
 	result = prev;
 }
 
+
 void Matrix::print_matrix()
 {
 	for (int i = 0; i < n; i++)
@@ -116,9 +114,9 @@ void Matrix::print_matrix()
 }
 
 
-
 void Matrix::reduction()
 {
+	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < n; i++)
 	{
 		float div = matrix[i][i];
@@ -127,10 +125,11 @@ void Matrix::reduction()
 	}
 }
 
+
 void Matrix::print_result()
 {
 	for (int i = 0; i < n; i++)
-		cout << "X" << i << " = " << setprecision(5) << result[i] << endl;
+		cout << "X" << i << " = " << fixed << result[i] << endl;
 }
 
 
@@ -144,19 +143,26 @@ void Matrix::print(float* a)
 
 void Matrix::generate()
 {
-	//srand(time(0));
+	srand(time(0));
+
+	solution = new float[n];
+	for (int i = 0; i < n; i++)
+		solution[i] = -2 + rand() % 7;
+
 	#pragma omp parallel for schedule(static)
 	for (int i = 0; i < n; i++)
 	{ 
-		float sum = 0;
-		for (int j = 0; j <= n; j++)
+		float sum = 0, right_part = 0;
+		for (int j = 0; j < n; j++)
 			if (i != j)
 			{
-				matrix[i][j] = 1;//0 + rand() % (51);
-				if (j != n) sum += matrix[i][j];
+				matrix[i][j] = -3 + rand() % 7;
+				sum += abs(matrix[i][j]);
+				right_part += matrix[i][j] * solution[j];
 			}
 		matrix[i][i] = sum + 1;
-		//matrix[i][i] += 0 + rand() % (50);
+		right_part += matrix[i][i] * solution[i];
+		matrix[i][n] = right_part;
 	}
 }
 
@@ -183,4 +189,14 @@ void Matrix::set()
 	cout << "\nВведите правые части:" << endl;
 	for (int i = 0; i < n; i++)
 		cin >> matrix[i][n];
+}
+
+
+float Matrix::maximal_deviation()
+{
+	float deviation = 0;
+	for (int i = 0; i < n; i++)
+		if (abs(result[i] - solution[i]) > deviation)
+			deviation = abs(result[i] - solution[i]);
+	return deviation;
 }

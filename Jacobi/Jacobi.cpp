@@ -3,6 +3,7 @@
 void main()
 {
 	setlocale(LC_ALL, "Russian");
+	cout.precision(8);
 
 	cout << "Количество переменных: ";
 	int n; cin >> n;
@@ -19,7 +20,9 @@ void main()
 		float start_time = omp_get_wtime();
 		matrix.sequential();
 		float end_time = omp_get_wtime();
-		matrix.print_result();
+		if (f) 
+			cout << "Максимальное отклонение от точного решения: " << fixed << matrix.maximal_deviation() << endl;
+		else matrix.print_result();
 		cout << end_time - start_time << " секунд." << endl;
 
 		system("pause");
@@ -28,7 +31,9 @@ void main()
 		start_time = omp_get_wtime();
 		matrix.parallel();
 		end_time = omp_get_wtime();
-		matrix.print_result();
+		if (f)
+			cout << "Максимальное отклонение от точного решения: " << fixed << matrix.maximal_deviation() << endl;
+		else matrix.print_result();
 		cout << end_time - start_time << " секунд." << endl;
 	}
 	else
