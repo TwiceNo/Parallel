@@ -1,0 +1,3 @@
+﻿  Source.cpp
+D:\repos\Parallel\sortings\Source.cpp(5,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  sortings.vcxproj -> D:\repos\Parallel\sortings\Debug\sortings.exe

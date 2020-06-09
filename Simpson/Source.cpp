@@ -3,7 +3,7 @@
 
 float function(float x)
 {
-	return sin(3 * x) + 4 * cos(2 * x);
+	return pow(3, x) + 4 * pow(x, 2) / 11 * (x / 12 - pow(x, 2));
 }
 
 float simpson(float a, float b)

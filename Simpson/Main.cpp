@@ -4,7 +4,7 @@ void main()
 {
 	setlocale(LC_ALL, "Rus");
 	cout << "Функция для интегрирования:" << endl;
-	cout << "sin(3 * x )+ 4 * cos(2 * x)" << endl << endl;
+	cout << "pow(3, x) + 4 * pow(x, 2) / 11 * (x / 12 - pow(x, 2))" << endl << endl;
 
 	cout << "Введите пределы интегрирования:" << endl;
 	cout << "A = "; double a; cin >> a;

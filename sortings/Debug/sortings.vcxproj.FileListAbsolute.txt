@@ -1,0 +1,2 @@
+D:\repos\Parallel\sortings\Debug\sortings.exe
+D:\repos\Parallel\sortings\Debug\sortings.pdb
