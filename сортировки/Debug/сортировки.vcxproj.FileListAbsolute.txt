@@ -1,0 +1,2 @@
+D:\repos\Parallel\сортировки\Debug\сортировки.exe
+D:\repos\Parallel\сортировки\Debug\сортировки.pdb

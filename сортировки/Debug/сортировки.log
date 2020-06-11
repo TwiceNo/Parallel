@@ -1,0 +1,4 @@
+﻿  сортировки.cpp
+D:\repos\Parallel\сортировки\сортировки.cpp(187,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+D:\repos\Parallel\сортировки\сортировки.cpp(189,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  сортировки.vcxproj -> D:\repos\Parallel\сортировки\Debug\сортировки.exe
